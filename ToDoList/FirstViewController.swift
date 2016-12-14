@@ -10,6 +10,7 @@ import UIKit
 
 class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var table: UITableView!
     var items:[String] = []
 
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -26,10 +27,17 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+    }
+    
+    //called everytime to return to a view
+    override func viewDidAppear(_ animated: Bool) {
+        
         let itemsObject = UserDefaults.standard.object(forKey: "items")
         
         if let tempItems = itemsObject as? [String] {
@@ -38,7 +46,7 @@ class FirstViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
         }
         
-        
+        table.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
