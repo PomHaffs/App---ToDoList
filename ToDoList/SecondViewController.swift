@@ -10,9 +10,41 @@ import UIKit
 
 class SecondViewController: UIViewController {
 
+    @IBOutlet weak var buttonStyle: UIButton!
+    
+    @IBOutlet weak var newItem: UITextField!
+    
+    @IBAction func addItemPressed(_ sender: Any) {
+        
+        let itemsObject = UserDefaults.standard.object(forKey: "items")
+        
+        //set up empty array that can be changed
+        var items:NSMutableArray
+        
+        if let tempItems = itemsObject as? NSMutableArray {
+            
+            items = tempItems
+            
+            items.adding(from: [newItem.text!])
+            
+        } else {
+            
+            items = [newItem.text!]
+        
+        }
+        
+        UserDefaults.standard.set(items, forKey: "items")
+        
+        newItem.text = ""
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        buttonStyle.layer.cornerRadius = 10
+        buttonStyle.layer.borderWidth = 1
+        
     }
 
     override func didReceiveMemoryWarning() {
