@@ -18,19 +18,19 @@ class SecondViewController: UIViewController {
         
         let itemsObject = UserDefaults.standard.object(forKey: "items")
         
-        //set up empty array that can be changed
-        var items:NSMutableArray
+        var items: [String]
         
-        if let tempItems = itemsObject as? NSMutableArray {
-            
+        //set up empty array that can be changed
+        
+        if let tempItems = itemsObject as? [String] {
+         
             items = tempItems
             
-            items.adding(from: [newItem.text!])
+            items.append(newItem.text!)
             
         } else {
             
             items = [newItem.text!]
-        
         }
         
         UserDefaults.standard.set(items, forKey: "items")
